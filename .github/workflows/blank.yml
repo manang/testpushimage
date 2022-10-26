@@ -34,3 +34,17 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+      - name: Publish to Registry
+        uses: jerray/publish-docker-action@master
+        with:
+          username: manang
+          password: ${{ secrets.GITHUB_TOKEN }}
+          repository: manang/testpushimage/temp
+          registry: docker.pkg.github.com
+          file: Dockerfile
+          tags: latest,newest,master
+      # - id: deploy
+      #   env:
+      #     NEW_VERSION: ${{ steps.build.outputs.tag }}
+      #   run: |
+      #     docker pull $NEW_VERSION
